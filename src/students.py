@@ -41,7 +41,7 @@ def render_student_management():
     students = get_all_students()
     if students:
         df = pd.DataFrame(students)
-        st.dataframe(df, use_container_width=True)
+        st.dataframe(df, width='stretch')
         
         # Delete/Edit Section
         st.write("### Manage Records")

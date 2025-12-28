@@ -63,7 +63,7 @@ def render_reports():
         
         # Data Table
         st.subheader("Detailed Records")
-        st.dataframe(df, use_container_width=True)
+        st.dataframe(df, width='stretch')
         
         # Export
         csv = df.to_csv(index=False).encode('utf-8')
