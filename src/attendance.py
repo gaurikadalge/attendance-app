@@ -24,10 +24,20 @@ def render_attendance_taking():
     
     selected_date = st.date_input("Date", date.today(), max_value=date.today())
     
-    students = run_query("SELECT * FROM students ORDER BY name ASC", fetch=True)
+    # Role Filter
+    role_filter = st.selectbox("Filter by Role", ["All", "Student", "Teacher", "Worker"])
+    
+    query = "SELECT * FROM students"
+    params = []
+    if role_filter != "All":
+        query += " WHERE role = ?"
+        params.append(role_filter)
+    query += " ORDER BY name ASC"
+    
+    students = run_query(query, tuple(params), fetch=True)
     
     if not students:
-        st.warning("No students to mark.")
+        st.warning("No members found to mark.")
         return
 
     # Bulk Actions
